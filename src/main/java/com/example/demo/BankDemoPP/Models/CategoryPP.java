@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,6 +18,9 @@ public class CategoryPP {
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "categorypp")
+    private List<CustomerPP> customerpp;
 
     public CategoryPP(String name) {
         this.name = name;

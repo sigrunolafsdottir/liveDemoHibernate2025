@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -24,6 +27,10 @@ public class CustomerPP {
     @ManyToOne
     @JoinColumn
     private CategoryPP categorypp;
+
+    @ManyToMany
+    @JoinTable
+    private List<AccountPP> accounts =new ArrayList<AccountPP>();
 
     public CustomerPP(String name, KpiPP kpipp) {
         this.name = name;
