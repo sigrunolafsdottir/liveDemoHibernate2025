@@ -12,15 +12,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Kpi {
+public class Konto {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private int credit;
+    private int saldo;
 
-    public Kpi(int credit) {
-        this.credit = credit;
+    public Konto(int saldo) {
+        this.saldo = saldo;
     }
 }

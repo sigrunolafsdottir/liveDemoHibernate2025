@@ -1,6 +1,8 @@
 package com.example.demo.BankDemoPP.Controllers;
 
+import com.example.demo.BankDemoPP.Models.CategoryPP;
 import com.example.demo.BankDemoPP.Models.CustomerPP;
+import com.example.demo.BankDemoPP.Repos.CategoryPPRepo;
 import com.example.demo.BankDemoPP.Repos.CustomerPPRepo;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,23 +13,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/PP")
-public class CustomerPPController {
+public class CategoryPPController {
 
 
-    private final CustomerPPRepo repo;
+    private final CategoryPPRepo repo;
 
-    public CustomerPPController(CustomerPPRepo repo) {
+    public CategoryPPController(CategoryPPRepo repo) {
         this.repo = repo;
     }
 
-    @RequestMapping("/customerPP/all")
-    public List<CustomerPP> getAllCustomers(){
+    @RequestMapping("/categoryPP/all")
+    public List<CategoryPP> getAllCategories(){
         return repo.findAll();
     }
 
 
-    @PostMapping("/customerPP/add")
-    public List<CustomerPP> add(@RequestBody CustomerPP c){
+    @PostMapping("/categoryPP/add")
+    public List<CategoryPP> add(@RequestBody CategoryPP c){
         repo.save(c);
         return repo.findAll();
     }

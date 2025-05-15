@@ -1,9 +1,7 @@
 package com.example.demo.BankDemoPP.Models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +16,24 @@ public class CustomerPP {
     private Long id;
 
     private String name;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private KpiPP kpipp;
+
+    @ManyToOne
+    @JoinColumn
+    private CategoryPP categorypp;
+
+    public CustomerPP(String name, KpiPP kpipp) {
+        this.name = name;
+        this.kpipp = kpipp;
+    }
+
+    public CustomerPP(String name, KpiPP kpipp, CategoryPP categorypp) {
+        this.name = name;
+        this.kpipp = kpipp;
+        this.categorypp = categorypp;
+    }
 
 }

@@ -1,7 +1,8 @@
 package com.example.demo.BankDemoPP.Repos;
 
-import com.example.demo.BankDemoPP.Models.CustomerPP;
+
+import com.example.demo.BankDemoPP.Models.KpiPP;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerPPRepo extends JpaRepository<CustomerPP, Long> {
+public interface KpiPPRepo extends JpaRepository<KpiPP, Long> {
 }

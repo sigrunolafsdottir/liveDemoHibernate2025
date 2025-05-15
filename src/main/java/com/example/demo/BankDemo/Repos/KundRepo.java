@@ -1,7 +1,7 @@
 package com.example.demo.BankDemo.Repos;
 
-import com.example.demo.BankDemo.Models.Kpi;
+import com.example.demo.BankDemo.Models.Kund;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface KpiRepo extends JpaRepository<Kpi, Long> {
+public interface KundRepo extends JpaRepository<Kund, Long> {
 }

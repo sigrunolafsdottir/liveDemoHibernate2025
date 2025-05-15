@@ -1,31 +1,39 @@
-package com.example.demo.GameDemo;
+package com.example.demo.BookDemo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
-public class GameController {
+public class BookController {
 
-    final private GameRepository gameRepository;
+    final private BookRepository bookRepository;
+    private static final Logger log = LoggerFactory.getLogger(BookController.class);
 
-    public GameController(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
+    public BookController(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
     }
 
-    @GetMapping("/game/all")
-    public List<Game> listGame() {
-        return gameRepository.findAll();
+    @GetMapping("/book/all")
+    public List<Book> listBook() {
+        return bookRepository.findAll();
     }
 
 
-    @PostMapping("/game/add")
-    public List<Game> addGame(@RequestBody Game game) {
-        gameRepository.save(game);
-        return gameRepository.findAll();
+    @PostMapping("/book/add")
+    public List<Book> addBook(@RequestBody Book book) {
+        bookRepository.save(book);
+        log.info("Book added: " + book.getTitle());
+        return bookRepository.findAll();
+    }
+
+    @PutMapping("/book/update")
+    public List<Book> putBook(@RequestBody Book book) {
+        bookRepository.save(book);
+        return bookRepository.findAll();
     }
 
 

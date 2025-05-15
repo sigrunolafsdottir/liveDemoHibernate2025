@@ -10,20 +10,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerPP {
+public class CategoryPP {
 
     @Id @GeneratedValue
     private Long id;
 
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private KpiPP kpipp;
-
-    public CustomerPP(String name, KpiPP kpipp) {
+    public CategoryPP(String name) {
         this.name = name;
-        this.kpipp = kpipp;
     }
 
 }

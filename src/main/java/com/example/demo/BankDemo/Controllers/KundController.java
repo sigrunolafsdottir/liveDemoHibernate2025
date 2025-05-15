@@ -1,15 +1,26 @@
 package com.example.demo.BankDemo.Controllers;
 
 
+import com.example.demo.BankDemo.Models.Kpi;
+import com.example.demo.BankDemo.Models.Kund;
 import com.example.demo.BankDemo.Repos.KpiRepo;
+import com.example.demo.BankDemo.Repos.KundRepo;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-public class KpiController {
+public class KundController {
 
-    private final KpiRepo kpiRepo;
+    private final KundRepo kundRepo;
 
-    public KpiController(KpiRepo kpiRepo) {
-        this.kpiRepo = kpiRepo;
+    public KundController(KundRepo kundRepo) {
+        this.kundRepo = kundRepo;
+    }
+
+    @RequestMapping("kund/all")
+    public List<Kund> getAllKund() {
+        return kundRepo.findAll();
     }
 }
