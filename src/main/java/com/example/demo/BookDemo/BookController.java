@@ -23,6 +23,11 @@ public class BookController {
     }
 
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello World";
+    }
+
     @PostMapping("/book/add")
     public List<Book> addBook(@RequestBody Book book) {
         bookRepository.save(book);
