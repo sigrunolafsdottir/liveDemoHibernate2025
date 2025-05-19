@@ -1,4 +1,4 @@
-package com.example.demo.BankDemo.Models;
+package com.example.demo.BankDemo.Dtos;
 
 
 import jakarta.persistence.*;
@@ -9,26 +9,15 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Kategori {
+public class KategoriDtoSmall {
 
-    @Id
-    @GeneratedValue
     private Long id;
-
-    @Column(unique = true)
     private String namn;
 
-    @OneToMany(mappedBy="kategori")
-    private List<Kund> kunder = new ArrayList<>();
-
-    public Kategori(String namn) {
+    public KategoriDtoSmall(String namn) {
         this.namn = namn;
     }
-
-
-
 }

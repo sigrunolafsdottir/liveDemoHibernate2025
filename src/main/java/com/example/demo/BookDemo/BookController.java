@@ -22,8 +22,8 @@ public class BookController {
         return bookRepository.findAll();
     }
 
-
-    @GetMapping("/hello")
+//http://localhost:8080/hello
+    @RequestMapping("/hello")
     public String hello() {
         return "Hello World";
     }

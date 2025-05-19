@@ -27,6 +27,7 @@ class BookControllerTest {
     @Test
     void hello() {
         System.out.println(restTemplate.getForObject("http://localhost:"+port+"/hello", String.class));
+
         assertThat(this.restTemplate.getForObject("http://localhost:"+port+"/hello", String.class))
                 .contains("Hello World");
     }
