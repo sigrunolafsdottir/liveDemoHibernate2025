@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 public class KategoriController {
 
+    //OBS INTE best practice att ha både repo och service, det ser ut så här pga demo-exemplen i testerna
     private final KategoriRepo kategoriRepo;
     private final KategoriService kategoriService;
 
