@@ -2,6 +2,7 @@ package com.example.demo.BankDemo.Controllers;
 
 
 import com.example.demo.BankDemo.Dtos.KategoriDtoBig;
+import com.example.demo.BankDemo.Dtos.KategoriDtoSmall;
 import com.example.demo.BankDemo.Models.Kategori;
 import com.example.demo.BankDemo.Models.Konto;
 import com.example.demo.BankDemo.Repos.KategoriRepo;
@@ -17,7 +18,8 @@ import java.util.List;
 @RestController
 public class KategoriController {
 
-    //OBS INTE best practice att ha både repo och service, det ser ut så här pga demo-exemplen i testerna
+    //OBS INTE best practice att ha både repo och service,
+    // det ser ut så här pga demo-exemplen i testerna skapades innan servicarna lades till
     private final KategoriRepo kategoriRepo;
     private final KategoriService kategoriService;
 
@@ -30,6 +32,13 @@ public class KategoriController {
     public List<KategoriDtoBig> getAllKategori() {
         return kategoriService.getAllaKategorier();
     }
+
+    @PostMapping("kategori/add")
+    public String addKategori(@RequestBody KategoriDtoSmall k) {
+        System.out.println("kategoricontroller "+k.getNamn());
+        return kategoriService.addKategori(k);
+    }
+
 
     @PostMapping("kategori/addOLD")
     public String addKategori(@RequestBody Kategori kategori) {

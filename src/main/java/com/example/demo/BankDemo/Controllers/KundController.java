@@ -6,6 +6,7 @@ import com.example.demo.BankDemo.Models.Kund;
 import com.example.demo.BankDemo.Repos.KundRepo;
 import com.example.demo.BankDemo.Services.ServiceImpl.KundService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class KundController {
 
-    private final KundRepo kundRepo;  //gammalt, ska inte vara här om vi använder servicar
     private final KundService kundService;
 
 
@@ -26,9 +26,11 @@ public class KundController {
     }
 
 
+
+/*
     @RequestMapping("kund/all")
     public List<Kund> getAllKund() {
         return kundRepo.findAll();
     }
-
+*/
 }

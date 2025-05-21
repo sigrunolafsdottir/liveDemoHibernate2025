@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2 th:text="${title}"></h2>
+<div class="allBooks" th:unless="${#lists.isEmpty(allBooks)}">
+    <table>
+        <tbody>
+        <tr th:each="book : ${allBooks}">
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.grade}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<p></p>
+<form action="#" th:action="@{/bookTH/add}" method="post" >
+    <label for="title">Title:</label><br>
+    <input type="text" id="title" name="title" value=""><br><br>
+    <label for="author">Author:</label><br>
+    <input type="text" id="author" name="author" value=""><br><br>
+    <label for="grade">Grade:</label><br>
+    <input type="text" id="grade" name="grade" value=""><br><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

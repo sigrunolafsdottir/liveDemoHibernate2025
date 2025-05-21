@@ -20,7 +20,6 @@ public class KategoriServiceImpl implements KategoriService {
 
     KategoriRepo kategoriRepo;
 
-
     public KategoriServiceImpl(KategoriRepo kategoriRepo) {
         this.kategoriRepo = kategoriRepo;
     }
@@ -30,6 +29,13 @@ public class KategoriServiceImpl implements KategoriService {
                 .map(k -> KategoriToKategoriDtoBig(k)).toList();
     }
 
+    public String addKategori(KategoriDtoSmall k){
+        System.out.println("service "+k.getNamn());
+        kategoriRepo.save(KategoriDtoSmallToKategori(k));
+        return "Kategori "+k.getNamn() + " is saved.";
+    }
+
+    @Override
     public KundDtoSmall KundToKundDtoSmall(Kund kund) {
         return new KundDtoSmall(kund.getId(), kund.getName());
     }
@@ -52,7 +58,7 @@ public class KategoriServiceImpl implements KategoriService {
 
     @Override
     public Kategori KategoriDtoSmallToKategori(KategoriDtoSmall kategori) {
-        return null;
+        return new Kategori(kategori.getNamn());
     }
 
     @Override
