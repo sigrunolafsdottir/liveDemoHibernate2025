@@ -10,6 +10,7 @@ import com.example.demo.BankDemo.Models.Kund;
 import com.example.demo.BankDemo.Repos.KategoriRepo;
 import com.example.demo.BankDemo.Repos.KundRepo;
 import com.example.demo.BankDemo.Services.ServiceImpl.KategoriService;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -31,12 +33,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 @ActiveProfiles("test")
+@Transactional
+@Rollback
 class KategoriServiceImplTest {
-
-    @Autowired
-    private MockMvc mvc;
 
     @Autowired
     private KategoriRepo kategoriRepo;
@@ -44,7 +44,8 @@ class KategoriServiceImplTest {
     @Autowired
     private KundRepo kundRepo;
 
-    private KategoriService service = new KategoriServiceImpl(kategoriRepo);
+    @Autowired
+    private KategoriService service;
 
 
     String kundnamn = "Svenne";
@@ -74,16 +75,15 @@ class KategoriServiceImplTest {
         kategoriRepo.save(new Kategori("silver"));
     }
 
+    @Transactional
     @Test
     public void getAllaKategorier() throws Exception {
 
-        MvcResult result = mvc.perform(get("/kategori/all"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.[*].namn")
-                        .value(containsInAnyOrder("guld", "silver"))).andReturn();
+        List<KategoriDtoBig> allKategories = service.getAllaKategorier();
+        assertTrue(allKategories.size() == 2);
+        assertTrue(allKategories.stream().map(k -> k.getNamn()).toList().contains("guld"));
+        assertTrue(allKategories.stream().map(k -> k.getNamn()).toList().contains("silver"));
 
-        String response = result.getResponse().getContentAsString(); // skriva ut datat
-        System.out.println("Response: " + response);
     }
 
     @Test
@@ -94,11 +94,11 @@ class KategoriServiceImplTest {
         }
         """;
 
-        mvc.perform(post("/kategori/addOLD")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonKategori))
-                .andExpect(status().isOk())
-                .andExpect(content().string("Kategori platinum lades till"));
+        service.addKategori(new KategoriDtoSmall("frigolit"));
+        List<KategoriDtoBig> allKategories = service.getAllaKategorier();
+        assertTrue(allKategories.stream().map(k -> k.getNamn()).toList().contains("frigolit"));
+
+
 
     }
 

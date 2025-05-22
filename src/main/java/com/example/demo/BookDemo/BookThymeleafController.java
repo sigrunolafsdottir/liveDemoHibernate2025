@@ -19,11 +19,23 @@ public class BookThymeleafController {
     }
 
 
-    //http://localhost:8080/hello
+    //http://localhost:8080/helloworld
     @RequestMapping("/helloworld")
     public String hello() {
         return "index.html";
     }
+
+
+    @RequestMapping("/hi")
+    public String helloWithName(@RequestParam String name, Model model) {
+        model.addAttribute("name", name);
+        model.addAttribute("bestBook", "Pale King");
+        Book b = new Book("Harry Potter", "author", 5);
+        model.addAttribute("harry", b);
+        return "greeting.html";
+    }
+
+
 
 
     @RequestMapping("/bookTH/all")
